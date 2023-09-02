@@ -1,16 +1,13 @@
 import { type FC } from 'react';
 
-import { Container } from '@mui/material';
-import Typography from '@mui/material/Typography';
+import { HomePage } from '@/pages';
 
-const MultiActionAreaCard: FC = () => {
+const Home: FC = () => {
 
   return (
-    <Container>
-      <Typography>WELCOLME</Typography>
-    </Container>
+    <HomePage/>
   );
 
 };
 
-export default MultiActionAreaCard;
+export default Home;
