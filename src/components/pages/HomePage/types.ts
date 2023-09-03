@@ -1,3 +1,7 @@
 export interface CustomGridItem {
-  isPanel?: boolean;
+  ispanel?: boolean;
+};
+
+export interface CardMainTextValue {
+  size?: 'small' | 'default' | 'large';
 };
