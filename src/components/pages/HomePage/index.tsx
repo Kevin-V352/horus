@@ -10,7 +10,9 @@ import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined';
 import WaterDropOutlinedIcon from '@mui/icons-material/WaterDropOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import WbTwilightOutlinedIcon from '@mui/icons-material/WbTwilightOutlined';
-import { Grid, Stack, Typography } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
+import { MapContainer, TileLayer } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
 import { Card, ProgressBar } from '@/ui';
 
@@ -23,7 +25,7 @@ const HomePage: FC = () => {
   return (
     <S.CustomGridContainer container >
       <S.CustomGridPanel1Item item xs={6}>
-
+        <p>holaaa</p>
       </S.CustomGridPanel1Item>
       <S.CustomGridPanel2Item item xs={6}>
         <Grid
@@ -159,7 +161,20 @@ const HomePage: FC = () => {
               title='Precipitación'
               headIcon={<BeachAccessOutlinedIcon />}
             >
-              <Typography>Card test</Typography>
+              <MapContainer
+                center={[51.505, -0.09]}
+                zoom={13}
+                scrollWheelZoom={false}
+                style={{
+                  height:   '400px',
+                  overflow: 'hidden'
+                }}
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+              </MapContainer>
             </Card>
           </Grid>
 

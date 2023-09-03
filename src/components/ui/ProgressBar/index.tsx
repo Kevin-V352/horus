@@ -20,13 +20,13 @@ const ProgressBar: FC<T.Props> = ({ title, icon, minValue, maxValue }) => {
         <Box>{icon}</Box>
       </Grid>
       <Grid item xs={1}>
-        <S.CustomTypography>{`${minValue} °`}</S.CustomTypography>
+        <S.CustomTypography>{`${minValue}°`}</S.CustomTypography>
       </Grid>
-      <Grid item xs={5}>
+      <Grid item xs={6}>
         <S.GradientLinearProgress variant="determinate" value={60}/>
       </Grid>
-      <Grid item xs={2}>
-        <S.CustomTypography>{`${maxValue} °`}</S.CustomTypography>
+      <Grid item xs={1}>
+        <S.CustomTypography>{`${maxValue}°`}</S.CustomTypography>
       </Grid>
     </S.CustomGridContainer>
   );

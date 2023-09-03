@@ -20,7 +20,9 @@ export const CustomGridPanel2Item = styled(Grid)((props) => ({
   // @ts-expect-error unknow error
   backgroundColor: props.theme.customTheme.pallete.background.black_transparent_03,
   flex:            1,
-  padding:         '30px'
+  padding:         '30px',
+  overflowY:       'scroll',
+  maxHeight:       '100vh'
 }));
 
 export const CardMainTextValue = styled(Typography)<I.CardMainTextValue>((props) => ({
