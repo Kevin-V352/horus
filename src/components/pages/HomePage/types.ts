@@ -3,5 +3,5 @@ export interface CustomGridItem {
 };
 
 export interface CardMainTextValue {
-  size?: 'small' | 'default' | 'large';
+  size?: 'small' | 'default' | 'large' | 'extralarge';
 };

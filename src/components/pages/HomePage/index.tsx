@@ -11,10 +11,8 @@ import WaterDropOutlinedIcon from '@mui/icons-material/WaterDropOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import WbTwilightOutlinedIcon from '@mui/icons-material/WbTwilightOutlined';
 import { Grid, Stack } from '@mui/material';
-import { MapContainer, TileLayer } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
 
-import { Card, ProgressBar } from '@/ui';
+import { Card, Map, ProgressBar } from '@/ui';
 
 import * as S from './styles';
 
@@ -25,7 +23,35 @@ const HomePage: FC = () => {
   return (
     <S.CustomGridContainer container >
       <S.CustomGridPanel1Item item xs={6}>
-        <p>holaaa</p>
+        <Stack>
+          <S.CardMainTextValue
+            size="extralarge"
+            fontWeight="bold"
+          >
+            17°
+          </S.CardMainTextValue>
+          <Stack >
+            <S.LocationButton
+              variant="text"
+              startIcon={<S.CustomSearchIcon fontSize='small' />}
+            >
+              <S.CardMainTextValue
+                size="large"
+                fontWeight="bold"
+              >
+                Barcelona, España
+              </S.CardMainTextValue>
+            </S.LocationButton>
+            <Stack
+              direction="row"
+              alignItems="center"
+              spacing="10px"
+            >
+              <CloudOutlinedIcon/>
+              <S.CardMainTextValue size='default'>5</S.CardMainTextValue>
+            </Stack>
+          </Stack>
+        </Stack>
       </S.CustomGridPanel1Item>
       <S.CustomGridPanel2Item item xs={6}>
         <Grid
@@ -161,20 +187,7 @@ const HomePage: FC = () => {
               title='Precipitación'
               headIcon={<BeachAccessOutlinedIcon />}
             >
-              <MapContainer
-                center={[51.505, -0.09]}
-                zoom={13}
-                scrollWheelZoom={false}
-                style={{
-                  height:   '400px',
-                  overflow: 'hidden'
-                }}
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-              </MapContainer>
+              <Map />
             </Card>
           </Grid>
 

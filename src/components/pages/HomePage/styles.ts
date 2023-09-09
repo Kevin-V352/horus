@@ -1,4 +1,6 @@
+import SearchIcon from '@mui/icons-material/Search';
 import {
+  Button,
   Grid,
   Slider,
   Stack,
@@ -13,7 +15,8 @@ export const CustomGridContainer = styled(Grid)`
 `;
 
 export const CustomGridPanel1Item = styled(Grid)`
-  flex: 1
+  flex: 1;
+  padding: 30px;
 `;
 
 export const CustomGridPanel2Item = styled(Grid)((props) => ({
@@ -25,12 +28,27 @@ export const CustomGridPanel2Item = styled(Grid)((props) => ({
   maxHeight:       '100vh'
 }));
 
-export const CardMainTextValue = styled(Typography)<I.CardMainTextValue>((props) => ({
+export const CardMainTextValue = styled(Typography)<I.CardMainTextValue>((props) => {
+
   // @ts-expect-error unknow error
-  color:    props.theme.customTheme.pallete.typography.white,
-  // @ts-expect-error unknow error
-  fontSize: (props.size === 'small') ? props.theme.customTheme.typography.font_size_4 : (props.size === 'large') ? props.theme.customTheme.typography.font_size_2 : props.theme.customTheme.typography.font_size_3
-}));
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const { font_size_1, font_size_2, font_size_3, font_size_4 } = props.theme.customTheme.typography;
+
+  const fontSizes = {
+    extralarge: font_size_1,
+    large:      font_size_2,
+    default:    font_size_3,
+    small:      font_size_4
+  };
+
+  return ({
+    // @ts-expect-error unknow error
+    color:    props.theme.customTheme.pallete.typography.white,
+    // @ts-expect-error unknow error
+    fontSize: fontSizes[props.size] ?? fontSizes.default
+  });
+
+});
 
 export const UVSlider = styled(Slider)`
   & .MuiSlider-track, .MuiSlider-rail {
@@ -48,4 +66,15 @@ export const StackList = styled(Stack)`
   height: 100%;
   text-align: center;
   justify-content: space-between;
+`;
+
+export const LocationButton = styled(Button)`
+  text-transform: none;
+  width: fit-content;
+  padding: 20px;
+`;
+
+export const CustomSearchIcon = styled(SearchIcon)`
+  color: #f0d12d;
+  transform: scale(1.6);
 `;
