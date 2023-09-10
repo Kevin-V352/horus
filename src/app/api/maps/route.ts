@@ -3,7 +3,7 @@ import { type NextRequest } from 'next/server';
 import { credentials } from '@/constants';
 import { LayerTypes } from '@/interfaces';
 
-export const GET = async (req: NextRequest): Promise<any> => {
+export const GET = async (req: NextRequest): Promise<Response> => {
 
   const url = new URL(req.url);
 
@@ -23,7 +23,7 @@ export const GET = async (req: NextRequest): Promise<any> => {
       message: invalidType
         ? `The ${type} value is invalid. The type must correspond to "LayerTypes".`
         : `The ${testArr[invalidCoordinate]} value is invalid. Coordinates must be numeric values.`
-    }));
+    }), { status: 200 });
 
   };
 
