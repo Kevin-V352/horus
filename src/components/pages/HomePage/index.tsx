@@ -6,12 +6,14 @@ import BeachAccessOutlinedIcon from '@mui/icons-material/BeachAccessOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import CloudOutlinedIcon from '@mui/icons-material/CloudOutlined';
 import DeviceThermostatOutlinedIcon from '@mui/icons-material/DeviceThermostatOutlined';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined';
 import WaterDropOutlinedIcon from '@mui/icons-material/WaterDropOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import WbTwilightOutlinedIcon from '@mui/icons-material/WbTwilightOutlined';
-import { Grid, Stack } from '@mui/material';
+import { AccordionDetails, Grid, Stack } from '@mui/material';
 
+import { useWeather } from '@/hooks';
 import { Card, Map, ProgressBar } from '@/ui';
 
 import * as S from './styles';
@@ -20,12 +22,14 @@ const cardCommonProps = { minHeight: 235 };
 
 const HomePage: FC = () => {
 
+  const { data: weather } = useWeather(-32.745820, -60.734330, 'en');
+
   return (
     <S.CustomGridContainer container >
       <S.CustomGridPanel1Item item xs={6}>
         <Stack>
           <S.CardMainTextValue
-            size="extralarge"
+            fontSize="4.5rem"
             fontWeight="bold"
           >
             17°
@@ -47,7 +51,7 @@ const HomePage: FC = () => {
               alignItems="center"
               spacing="10px"
             >
-              <CloudOutlinedIcon/>
+              <CloudOutlinedIcon />
               <S.CardMainTextValue size='default'>5</S.CardMainTextValue>
             </Stack>
           </Stack>
@@ -61,28 +65,32 @@ const HomePage: FC = () => {
 
           <Grid item xs={12}>
             <Card
-              title='Previsión a 10 dias'
+              title='Previsión a 7 dias'
               headIcon={<CalendarMonthOutlinedIcon />}
+              loading={false}
             >
               <Stack>
-                <ProgressBar
-                  title='Hoy'
-                  icon={<CloudOutlinedIcon />}
-                  minValue={12}
-                  maxValue={30}
-                />
-                <ProgressBar
-                  title='Mañana'
-                  icon={<CloudOutlinedIcon />}
-                  minValue={12}
-                  maxValue={30}
-                />
-                <ProgressBar
-                  title='Domingo'
-                  icon={<CloudOutlinedIcon />}
-                  minValue={12}
-                  maxValue={30}
-                />
+                {
+                  weather?.daily.slice(0, 3).map((day, index) => (
+                    <ProgressBar key={index} data={day} />
+                  ))
+                }
+                <S.DaysAccordion disableGutters>
+                  <S.DaysAccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="days-panel-content"
+                    id="days-panel-header"
+                  >
+                  </S.DaysAccordionSummary>
+                  <AccordionDetails sx={{ padding: 0 }}>
+                    {
+                      weather?.daily.slice(3).map((day, index) => (
+                        <ProgressBar key={index} data={day} />
+                      ))
+                    }
+                  </AccordionDetails>
+
+                </S.DaysAccordion>
               </Stack>
             </Card>
           </Grid>
@@ -91,15 +99,18 @@ const HomePage: FC = () => {
             <Card
               title='Índice UV'
               headIcon={<WbSunnyOutlinedIcon />}
+              loading={!weather?.current.uvi && (typeof !weather?.current.uvi !== 'number')}
               {...cardCommonProps}
             >
               <Stack textAlign="center">
-                <S.CardMainTextValue size='large'>5</S.CardMainTextValue>
+                <S.CardMainTextValue size='large'>{weather?.current.uvi}</S.CardMainTextValue>
                 <S.CardMainTextValue>Promedio</S.CardMainTextValue>
                 <S.UVSlider
-                  defaultValue={50}
                   aria-label="Default"
                   valueLabelDisplay="auto"
+                  value={weather?.current.uvi}
+                  min={0}
+                  max={10}
                   disabled
                 />
               </Stack>
@@ -110,10 +121,11 @@ const HomePage: FC = () => {
             <Card
               title='Atardecer'
               headIcon={<WbTwilightOutlinedIcon />}
+              loading={!weather?.current.sunset}
               {...cardCommonProps}
             >
               <S.StackList>
-                <S.CardMainTextValue size="large">20:30</S.CardMainTextValue>
+                <S.CardMainTextValue size="large">{weather?.current.sunset}</S.CardMainTextValue>
                 <S.CardMainTextValue size="small">
                   Amanecer: 06:00
                 </S.CardMainTextValue>
@@ -125,6 +137,7 @@ const HomePage: FC = () => {
             <Card
               title='Precipitación'
               headIcon={<BeachAccessOutlinedIcon />}
+              loading={true}
               {...cardCommonProps}
             >
               <S.StackList>
@@ -141,10 +154,11 @@ const HomePage: FC = () => {
             <Card
               title='Temperatura'
               headIcon={<DeviceThermostatOutlinedIcon />}
+              loading={!weather?.current.temp}
               {...cardCommonProps}
             >
               <S.StackList>
-                <S.CardMainTextValue size="large">20°</S.CardMainTextValue>
+                <S.CardMainTextValue size="large">{weather?.current.temp}°C</S.CardMainTextValue>
                 <S.CardMainTextValue size="small">
                   Se siente mas fresco con el viento
                 </S.CardMainTextValue>
@@ -156,10 +170,11 @@ const HomePage: FC = () => {
             <Card
               title='Humedad'
               headIcon={<WaterDropOutlinedIcon />}
+              loading={!weather?.current.humidity}
               {...cardCommonProps}
             >
               <S.StackList>
-                <S.CardMainTextValue size="large">55%</S.CardMainTextValue>
+                <S.CardMainTextValue size="large">{weather?.current.humidity}%</S.CardMainTextValue>
                 <S.CardMainTextValue size="small">
                   El punto de rocío ahora es 1°
                 </S.CardMainTextValue>
@@ -171,10 +186,11 @@ const HomePage: FC = () => {
             <Card
               title='Presión'
               headIcon={<SpeedOutlinedIcon />}
+              loading={!weather?.current.pressure}
               {...cardCommonProps}
             >
               <S.StackList>
-                <S.CardMainTextValue size="large">764mmHg</S.CardMainTextValue>
+                <S.CardMainTextValue size="large">{weather?.current.pressure}hPa</S.CardMainTextValue>
                 <S.CardMainTextValue size="small">
                   Arte
                 </S.CardMainTextValue>
@@ -186,6 +202,7 @@ const HomePage: FC = () => {
             <Card
               title='Precipitación'
               headIcon={<BeachAccessOutlinedIcon />}
+              loading={false}
             >
               <Map />
             </Card>

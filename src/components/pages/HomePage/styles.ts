@@ -1,5 +1,7 @@
 import SearchIcon from '@mui/icons-material/Search';
 import {
+  Accordion,
+  AccordionSummary,
   Button,
   Grid,
   Slider,
@@ -45,7 +47,7 @@ export const CardMainTextValue = styled(Typography)<I.CardMainTextValue>((props)
     // @ts-expect-error unknow error
     color:    props.theme.customTheme.pallete.typography.white,
     // @ts-expect-error unknow error
-    fontSize: fontSizes[props.size] ?? fontSizes.default
+    fontSize: fontSizes[props.size] ?? props.fontSize ?? fontSizes.default
   });
 
 });
@@ -78,3 +80,24 @@ export const CustomSearchIcon = styled(SearchIcon)`
   color: #f0d12d;
   transform: scale(1.6);
 `;
+
+export const DaysAccordion = styled(Accordion)`
+  &.MuiAccordion-root {
+    background-color: transparent;
+    box-shadow: none;
+  };
+
+  &.MuiAccordion-root::before {
+    display: none;
+  };
+`;
+
+export const DaysAccordionSummary = styled(AccordionSummary)((props) => ({
+  '& .MuiAccordionSummary-expandIconWrapper': {
+    // @ts-expect-error unknow error
+    color:          props.theme.customTheme.pallete.typography.white,
+    width:          '100%',
+    justifyContent: 'center',
+    boxShadow:      'none'
+  }
+}));
