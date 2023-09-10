@@ -4,8 +4,12 @@ import { Box, Grid } from '@mui/material';
 
 import * as S from './styles';
 import type * as T from './types';
+import { WeatherIcon } from '..';
 
-const ProgressBar: FC<T.Props> = ({ title, icon, minValue, maxValue }) => {
+const ProgressBar: FC<T.Props> = ({ data }) => {
+
+  const { dayName, dayTemp, iconId, maxTemp, minTemp } = data;
+  const valuePercetage = Math.round((dayTemp * 100) / maxTemp);
 
   return (
     <S.CustomGridContainer
@@ -14,19 +18,24 @@ const ProgressBar: FC<T.Props> = ({ title, icon, minValue, maxValue }) => {
       columnSpacing="10px"
     >
       <Grid item xs={3}>
-        <S.CustomTypography>{title}</S.CustomTypography>
+        <S.CustomTypography>{dayName}</S.CustomTypography>
       </Grid>
       <Grid item xs={1}>
-        <Box>{icon}</Box>
+        <Box>
+          <WeatherIcon iconId={iconId as any}/>
+        </Box>
       </Grid>
       <Grid item xs={1}>
-        <S.CustomTypography>{`${minValue}°`}</S.CustomTypography>
+        <S.CustomTypography>{`${minTemp}°`}</S.CustomTypography>
       </Grid>
       <Grid item xs={6}>
-        <S.GradientLinearProgress variant="determinate" value={60}/>
+        <S.GradientLinearProgress
+          variant="determinate"
+          value={valuePercetage}
+        />
       </Grid>
       <Grid item xs={1}>
-        <S.CustomTypography>{`${maxValue}°`}</S.CustomTypography>
+        <S.CustomTypography>{`${maxTemp}°`}</S.CustomTypography>
       </Grid>
     </S.CustomGridContainer>
   );

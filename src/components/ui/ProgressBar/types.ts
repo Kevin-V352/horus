@@ -1,8 +1,5 @@
-import { type ReactNode } from 'react';
+import { type MinDailyWeater } from '@/interfaces';
 
 export interface Props {
-  icon: ReactNode;
-  maxValue: number;
-  minValue: number;
-  title: string;
+  data: MinDailyWeater;
 };
