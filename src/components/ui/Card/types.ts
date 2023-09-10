@@ -1,10 +1,11 @@
 import { type ReactNode } from 'react';
 
 export interface Props {
-  children: ReactNode;
-  headIcon: ReactNode;
+  children:   ReactNode;
+  headIcon:   ReactNode;
   minHeight?: number;
-  title: string;
+  title:      string;
+  loading:    boolean;
 };
 
 export interface CustomCard {
