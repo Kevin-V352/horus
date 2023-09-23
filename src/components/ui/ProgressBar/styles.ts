@@ -1,13 +1,8 @@
-import { styled, LinearProgress, Typography, Grid } from '@mui/material';
+import { styled, LinearProgress, Grid } from '@mui/material';
 
 export const CustomGridContainer = styled(Grid)((props) => ({
   // @ts-expect-error unknow error
   color: props.theme.customTheme.pallete.typography.white
-}));
-
-export const CustomTypography = styled(Typography)((props) => ({
-  // @ts-expect-error unknow error
-  fontSize: props.theme.customTheme.typography.font_size_3
 }));
 
 export const GradientLinearProgress = styled(LinearProgress)`

@@ -4,7 +4,7 @@ import { Box, Grid } from '@mui/material';
 
 import * as S from './styles';
 import type * as T from './types';
-import { WeatherIcon } from '..';
+import { Text, WeatherIcon } from '..';
 
 const ProgressBar: FC<T.Props> = ({ data }) => {
 
@@ -18,7 +18,7 @@ const ProgressBar: FC<T.Props> = ({ data }) => {
       columnSpacing="10px"
     >
       <Grid item xs={3}>
-        <S.CustomTypography>{dayName}</S.CustomTypography>
+        <Text $fontsize='font_size_md'>{dayName}</Text>
       </Grid>
       <Grid item xs={1}>
         <Box>
@@ -26,7 +26,7 @@ const ProgressBar: FC<T.Props> = ({ data }) => {
         </Box>
       </Grid>
       <Grid item xs={1}>
-        <S.CustomTypography>{`${minTemp}°`}</S.CustomTypography>
+        <Text $fontsize='font_size_md'>{`${minTemp}°`}</Text>
       </Grid>
       <Grid item xs={6}>
         <S.GradientLinearProgress
@@ -35,7 +35,7 @@ const ProgressBar: FC<T.Props> = ({ data }) => {
         />
       </Grid>
       <Grid item xs={1}>
-        <S.CustomTypography>{`${maxTemp}°`}</S.CustomTypography>
+        <Text $fontsize='font_size_md'>{`${maxTemp}°`}</Text>
       </Grid>
     </S.CustomGridContainer>
   );
