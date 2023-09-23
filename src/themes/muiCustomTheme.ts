@@ -23,10 +23,11 @@ const theme = createTheme({
       }
     },
     typography: {
-      font_size_1: '3.3rem',
-      font_size_2: '2rem',
-      font_size_3: '1.3rem',
-      font_size_4: '1rem'
+      font_size_xxl: '4.5rem',
+      font_size_xl:  '3.3rem',
+      font_size_lg:  '2rem',
+      font_size_md:  '1.3rem',
+      font_size_sm:  '1rem'
     }
   }
 });

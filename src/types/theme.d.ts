@@ -15,10 +15,11 @@ declare module '@mui/material/styles' {
         };
       };
       typography: {
-        font_size_1: string;
-        font_size_2: string;
-        font_size_3: string;
-        font_size_4: string;
+        font_size_xxl:  string;
+        font_size_xl:   string;
+        font_size_lg:   string;
+        font_size_md:   string;
+        font_size_sm:   string;
       };
     };
   }
@@ -37,10 +38,11 @@ declare module '@mui/material/styles' {
         };
       };
       typography?: {
-        font_size_1?: string;
-        font_size_2?: string;
-        font_size_3?: string;
-        font_size_4?: string;
+        font_size_xxl?:  string;
+        font_size_xl?:   string;
+        font_size_lg?:   string;
+        font_size_md?:   string;
+        font_size_sm?:   string;
       };
     };
   }
