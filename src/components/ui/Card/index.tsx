@@ -2,6 +2,8 @@ import { type FC } from 'react';
 
 import { CardHeader, Skeleton } from '@mui/material';
 
+import { Text } from '@/ui';
+
 import * as S from './styles';
 import { type Props } from './types';
 
@@ -24,7 +26,7 @@ const Card: FC<Props> = ({ children, title, headIcon, minHeight, loading }) => {
               <>
                 <CardHeader
                   avatar={<S.IconWrapper>{headIcon}</S.IconWrapper>}
-                  title={<S.CustomTypography>{title}</S.CustomTypography>}
+                  title={<Text $color='battleship_grey'>{title}</Text>}
                 />
                 <S.CustomCardContent >
                   {children}
