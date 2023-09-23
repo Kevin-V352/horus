@@ -17,6 +17,8 @@ export type WeatherIconId =
   | '13n'
   | '50d'
   | '50n'
+  | '10001d'
+  | '10001n'
 
 export interface Props {
   iconId: WeatherIconId;

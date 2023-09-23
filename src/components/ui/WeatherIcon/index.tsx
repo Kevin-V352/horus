@@ -9,6 +9,7 @@ import NightsStayOutlinedIcon from '@mui/icons-material/NightsStayOutlined';
 import ThunderstormOutlinedIcon from '@mui/icons-material/ThunderstormOutlined';
 import WaterDropOutlinedIcon from '@mui/icons-material/WaterDropOutlined';
 import WavesOutlinedIcon from '@mui/icons-material/WavesOutlined';
+import WbTwilightOutlinedIcon from '@mui/icons-material/WbTwilightOutlined';
 
 import type * as T from './types';
 
@@ -49,6 +50,10 @@ const WeatherIcon: FC<T.Props> = ({ iconId }) => {
     case '50d':
     case '50n':
       return <WavesOutlinedIcon/>;
+
+    case '10001d':
+    case '10001n':
+      return <WbTwilightOutlinedIcon/>;
 
     default:
       return <BlockOutlinedIcon/>;
