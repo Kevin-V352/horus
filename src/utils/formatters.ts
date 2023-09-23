@@ -33,7 +33,7 @@ export const insertSunsetAndSunrise = (hours: Current[], sunset: DayEvent, sunri
     if (sunsetIndex !== -1) {
 
       result[sunsetIndex] = {
-        iconId: '10002d',
+        iconId: '10001d',
         temp:   0,
         type:   'sunrise',
         hour:   `${sunrise.hour}:${sunrise.minutes}`
