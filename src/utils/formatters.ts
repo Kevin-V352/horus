@@ -62,3 +62,5 @@ export const getDayNames = (timestamp: number): string => {
   else return new Date((timestamp * 1000)).toLocaleDateString('en-US', { weekday: 'long' });
 
 };
+
+export const capitalize = (string: string): string => string[0].toUpperCase() + string.slice(1);

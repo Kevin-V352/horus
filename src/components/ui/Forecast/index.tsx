@@ -1,6 +1,7 @@
 import { type FC } from 'react';
 
 import { Text, WeatherIcon } from '@/ui';
+import { formatters } from '@/utils';
 
 import * as S from './styles';
 import type * as T from './types';
@@ -14,7 +15,7 @@ const Forecast: FC<T.Props> = ({ data }) => {
           <S.ForecastItem key={index}>
             <Text>{hour}</Text>
             <WeatherIcon iconId={iconId as any} />
-            <Text>{(type === 'hour') ? `${temp}°` : (type[0].toUpperCase() + type.slice(1))}</Text>
+            <Text>{(type === 'hour') ? `${temp}°` : formatters.capitalize(type)}</Text>
           </S.ForecastItem>
         ))
       }

@@ -117,35 +117,58 @@ export interface Temp {
 
 export interface MinWeatherResponse {
   current: {
+    description:    string;
+    dewPoint:       number;
+    humidity:       number;
+    iconId:         string;
+    precipitation?: number;
+    pressure:       number;
+    sunset:         string | null;
     temp:           number;
     uvi:            number;
-    sunset:         string | null;
-    precipitation?: number;
-    humidity:       number;
-    pressure:       number;
-    iconId:         string;
-    description:    string;
   };
   hourly: MinHourlyWeater[];
   daily: MinDailyWeater[];
 }
 
 export interface MinHourlyWeater {
-  temp:   number;
-  iconId: string;
-  type:   'sunset' | 'sunrise' | 'hour';
   hour:   number | string;
+  iconId: string;
+  temp:   number;
+  type:   'sunset' | 'sunrise' | 'hour';
 }
 
 export interface MinDailyWeater {
-  minTemp:  number;
-  maxTemp:  number;
-  dayTemp:  number;
   dayName:  string;
+  dayTemp:  number;
   iconId:   string;
+  maxTemp:  number;
+  minTemp:  number;
 }
 
 export type DayEvent = {
   hour:     number;
   minutes:  number;
 } | null;
+
+export type WeatherIconId =
+  | '01d'
+  | '01n'
+  | '02d'
+  | '02n'
+  | '03d'
+  | '03n'
+  | '04d'
+  | '04n'
+  | '09d'
+  | '09n'
+  | '10d'
+  | '10n'
+  | '11d'
+  | '11n'
+  | '13d'
+  | '13n'
+  | '50d'
+  | '50n'
+  | '10001d'
+  | '10001n';

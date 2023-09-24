@@ -63,22 +63,23 @@ export const GET = async (req: NextRequest): Promise<Response> => {
 
     const formattedData: MinWeatherResponse = {
       current: {
-        temp:          Math.round(current.temp),
-        uvi:           current.uvi,
-        sunset:        sunset ? `${sunset.hour}:${sunset.minutes}` : null,
-        precipitation: current?.rain?.['1h'],
+        description:   current.weather[0].description,
+        dewPoint:      current.dew_point,
         humidity:      current.humidity,
-        pressure:      current.pressure,
         iconId:        current.weather[0].icon,
-        description:   current.weather[0].description
+        precipitation: current?.rain?.['1h'] ?? 0,
+        pressure:      current.pressure,
+        sunset:        sunset ? `${sunset.hour}:${sunset.minutes}` : null,
+        temp:          Math.round(current.temp),
+        uvi:           current.uvi
       },
       hourly: formatters.insertSunsetAndSunrise(hourly, sunset, sunrise),
       daily:  daily.map(({ temp, weather, dt }) => ({
-        minTemp: Math.round(temp.min),
-        maxTemp: Math.round(temp.max),
+        dayName: formatters.getDayNames(dt),
         dayTemp: Math.round(temp.day),
         iconId:  weather[0].icon,
-        dayName: formatters.getDayNames(dt)
+        maxTemp: Math.round(temp.max),
+        minTemp: Math.round(temp.min)
       }))
     };
 
