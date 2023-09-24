@@ -6,11 +6,8 @@ import {
   Grid,
   Slider,
   Stack,
-  Typography,
   styled
 } from '@mui/material';
-
-import type * as I from './types';
 
 export const CustomGridContainer = styled(Grid)`
   flex: 1;
@@ -19,6 +16,7 @@ export const CustomGridContainer = styled(Grid)`
 export const CustomGridPanel1Item = styled(Grid)`
   flex: 1;
   padding: 30px;
+  
 `;
 
 export const CustomGridPanel2Item = styled(Grid)((props) => ({
@@ -29,28 +27,6 @@ export const CustomGridPanel2Item = styled(Grid)((props) => ({
   overflowY:       'scroll',
   maxHeight:       '100vh'
 }));
-
-export const CardMainTextValue = styled(Typography)<I.CardMainTextValue>((props) => {
-
-  // @ts-expect-error unknow error
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { font_size_1, font_size_2, font_size_3, font_size_4 } = props.theme.customTheme.typography;
-
-  const fontSizes = {
-    extralarge: font_size_1,
-    large:      font_size_2,
-    default:    font_size_3,
-    small:      font_size_4
-  };
-
-  return ({
-    // @ts-expect-error unknow error
-    color:    props.theme.customTheme.pallete.typography.white,
-    // @ts-expect-error unknow error
-    fontSize: fontSizes[props.size] ?? props.fontSize ?? fontSizes.default
-  });
-
-});
 
 export const UVSlider = styled(Slider)`
   & .MuiSlider-track, .MuiSlider-rail {
@@ -73,7 +49,7 @@ export const StackList = styled(Stack)`
 export const LocationButton = styled(Button)`
   text-transform: none;
   width: fit-content;
-  padding: 20px;
+  padding: 0px
 `;
 
 export const CustomSearchIcon = styled(SearchIcon)`
