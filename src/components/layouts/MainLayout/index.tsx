@@ -1,12 +1,21 @@
-import { type FC } from 'react';
+'use client';
+
+import { useContext, type FC } from 'react';
+
+import { WeatherContext } from '@/contexts';
 
 import * as S from './styles';
-import { type Props } from './types';
+import { type IProps } from './types';
 
-const MainLayout: FC<Props> = ({ children }) => {
+const MainLayout: FC<IProps> = ({ children }) => {
+
+  const { backgroundId } = useContext(WeatherContext);
 
   return (
-    <S.Container maxWidth={false}>
+    <S.Container
+      maxWidth={false}
+      $backgroundimageid={backgroundId}
+    >
       {children}
     </S.Container>
   );

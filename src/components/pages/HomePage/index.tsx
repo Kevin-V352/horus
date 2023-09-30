@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
-import { type FC } from 'react';
+import { useEffect, type FC, useContext } from 'react';
 
 import BeachAccessOutlinedIcon from '@mui/icons-material/BeachAccessOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
@@ -12,6 +13,7 @@ import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import WbTwilightOutlinedIcon from '@mui/icons-material/WbTwilightOutlined';
 import { AccordionDetails, Box, Grid, Stack } from '@mui/material';
 
+import { WeatherContext } from '@/contexts';
 import { useWeather } from '@/hooks';
 import { type WeatherIconId } from '@/interfaces';
 import { Card, Forecast, Map, ProgressBar, Text, WeatherIcon } from '@/ui';
@@ -23,9 +25,15 @@ const cardCommonProps = { minHeight: 235 };
 
 const HomePage: FC = () => {
 
+  const { changeBackground } = useContext(WeatherContext);
+
   const { data: weather } = useWeather(-32.745820, -60.734330, 'en');
 
-  console.log(typeof !weather?.current.uvi);
+  useEffect(() => {
+
+    if (weather) changeBackground(weather.current.iconId as WeatherIconId);
+
+  }, [weather]);
 
   return (
     <S.CustomGridContainer container >
