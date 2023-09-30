@@ -1,4 +1,8 @@
+'use client';
+
 import { type FC, type PropsWithChildren } from 'react';
+
+import { WeatherProvider } from '@/contexts';
 
 import ThemeRegistry from './MuiThemeRegistry/ThemeRegistry';
 
@@ -6,7 +10,9 @@ const Providers: FC<PropsWithChildren> = (props) => {
 
   return (
     <ThemeRegistry>
-      {props.children}
+      <WeatherProvider>
+        {props.children}
+      </WeatherProvider>
     </ThemeRegistry>
   );
 
