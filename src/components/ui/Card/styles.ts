@@ -15,6 +15,7 @@ export const CustomCard = styled(Card)<T.CustomCard>((props) => ({
 
 export const CustomCardContent = styled(CardContent)`
   flex: 1;
+  padding-top: 0px;
 `;
 
 export const IconWrapper = styled(Box)((props) => ({

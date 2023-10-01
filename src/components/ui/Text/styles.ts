@@ -29,6 +29,7 @@ const getFontSizeFromTheme = (fontSize: T.CustomTypographyProps['$fontsize'], th
 };
 
 export const CustomTypography = styled(Typography)<T.CustomTypographyProps>((props) => ({
-  color:    getColorFromTheme(props.$color, props.theme),
-  fontSize: getFontSizeFromTheme(props.$fontsize, props.theme)
+  color:      getColorFromTheme(props.$color, props.theme),
+  fontSize:   getFontSizeFromTheme(props.$fontsize, props.theme),
+  fontWeight: props.$fontWeight
 }));

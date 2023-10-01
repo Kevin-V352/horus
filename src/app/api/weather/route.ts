@@ -69,7 +69,8 @@ export const GET = async (req: NextRequest): Promise<Response> => {
         iconId:        current.weather[0].icon,
         precipitation: current?.rain?.['1h'] ?? 0,
         pressure:      current.pressure,
-        sunset:        sunset ? `${sunset.hour}:${sunset.minutes}` : null,
+        sunrise:       sunrise ? formatters.formatTime(`${sunrise.hour}:${sunrise.minutes}`) : null,
+        sunset:        sunset ? formatters.formatTime(`${sunset.hour}:${sunset.minutes}`) : null,
         temp:          Math.round(current.temp),
         uvi:           current.uvi
       },

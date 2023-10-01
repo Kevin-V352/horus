@@ -2,7 +2,7 @@ import { styled, Stack } from '@mui/material';
 
 export const ForecastContainer = styled(Stack)(() => ({
   gap:          '20px',
-  marginBottom: '30px'
+  marginBottom: '15px'
 }));
 
 export const ForecastItem = styled(Stack)((props) => ({

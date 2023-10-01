@@ -123,6 +123,7 @@ export interface MinWeatherResponse {
     iconId:         string;
     precipitation?: number;
     pressure:       number;
+    sunrise:        string | null;
     sunset:         string | null;
     temp:           number;
     uvi:            number;

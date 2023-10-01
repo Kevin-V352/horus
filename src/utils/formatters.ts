@@ -1,5 +1,13 @@
 import { type MinHourlyWeater, type Current, type DayEvent } from '@/interfaces';
 
+export const formatTime = (time: string): string => {
+
+  const [hours, minutes] = time.split(':');
+
+  return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
+
+};
+
 export const insertSunsetAndSunrise = (hours: Current[], sunset: DayEvent, sunrise: DayEvent): MinHourlyWeater[] => {
 
   const result: MinHourlyWeater[] = hours.slice(0, 24).map((hourItem) => ({
@@ -19,7 +27,7 @@ export const insertSunsetAndSunrise = (hours: Current[], sunset: DayEvent, sunri
         iconId: '10001n',
         temp:   0,
         type:   'sunset',
-        hour:   `${sunset.hour}:${sunset.minutes}` as any
+        hour:   formatTime(`${sunset.hour}:${sunset.minutes}`) as any
       };
 
     }
@@ -36,10 +44,10 @@ export const insertSunsetAndSunrise = (hours: Current[], sunset: DayEvent, sunri
         iconId: '10001d',
         temp:   0,
         type:   'sunrise',
-        hour:   `${sunrise.hour}:${sunrise.minutes}`
+        hour:   formatTime(`${sunrise.hour}:${sunrise.minutes}`)
       };
 
-    }
+    };
 
   };
 

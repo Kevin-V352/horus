@@ -43,30 +43,48 @@ const HomePage: FC = () => {
           display:        'flex',
           flexDirection:  'column',
           justifyContent: 'flex-end',
-          gap:            '20px'
+          gap:            '25px'
         }}>
-          <Text $fontsize='font_size_xxl'>17°</Text>
+
+          <Text
+            $fontsize='font_size_xxl'
+            $fontWeight='bold'
+          >
+            17°
+          </Text>
+
           <S.LocationButton
             variant="text"
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <S.CustomSearchIcon fontSize='small' />
-              <Text $fontsize='font_size_lg'>Barcelona, España</Text>
+              <Text
+                $fontsize='font_size_lg'
+                $fontWeight='bold'
+              >
+                Barcelona, España
+              </Text>
             </Box>
           </S.LocationButton>
+
           <Stack
             direction="row"
             alignItems="center"
             spacing="10px"
           >
-            <WeatherIcon iconId={weather?.current.iconId as WeatherIconId || '01d'} />
+            <WeatherIcon
+              iconId={weather?.current.iconId as WeatherIconId || '01d'}
+              iconProps={{ fontSize: 'large', style: { color: '#FFF' } }}
+            />
             <Text $fontsize='font_size_md'>{weather?.current.description ? formatters.capitalize(weather.current.description) : ''}</Text>
           </Stack>
+
           {
             weather?.hourly && (
               <Forecast data={weather?.hourly} />
             )
           }
+
         </Box>
       </S.CustomGridPanel1Item>
       <S.CustomGridPanel2Item item xs={6}>
@@ -80,7 +98,7 @@ const HomePage: FC = () => {
               title='Previsión a 7 dias'
               headIcon={<CalendarMonthOutlinedIcon />}
               loading={!weather?.daily}
-              minHeight={244}
+              minHeight={228}
             >
               <Stack>
                 {
@@ -116,7 +134,7 @@ const HomePage: FC = () => {
               {...cardCommonProps}
             >
               <Stack textAlign="center">
-                <Text $fontsize="font_size_lg">{weather?.current.uvi}</Text>
+                <Text $fontsize="font_size_xl">{weather?.current.uvi}</Text>
                 <Text $fontsize="font_size_md">Promedio</Text>
                 <S.UVSlider
                   aria-label="Default"
@@ -138,8 +156,10 @@ const HomePage: FC = () => {
               {...cardCommonProps}
             >
               <S.StackList>
-                <Text $fontsize="font_size_lg">{weather?.current.sunset}</Text>
-                <Text $fontsize="font_size_sm">Amanecer: 06:00</Text>
+                <Text $fontsize="font_size_xl">{weather?.current.sunset}</Text>
+                {
+                  weather?.current.sunrise && <Text $fontsize="font_size_sm">{`Amanecer: ${weather?.current.sunrise}`}</Text>
+                }
               </S.StackList>
             </Card>
           </Grid>
@@ -152,7 +172,7 @@ const HomePage: FC = () => {
               {...cardCommonProps}
             >
               <S.StackList>
-                <Text $fontsize="font_size_lg">{weather?.current.precipitation}mm</Text>
+                <Text $fontsize="font_size_xl">{weather?.current.precipitation}mm</Text>
                 <Text $fontsize="font_size_sm">Predicción de la última hora</Text>
               </S.StackList>
             </Card>
@@ -166,7 +186,7 @@ const HomePage: FC = () => {
               {...cardCommonProps}
             >
               <S.StackList>
-                <Text $fontsize="font_size_lg">{weather?.current.temp}°C</Text>
+                <Text $fontsize="font_size_xl">{weather?.current.temp}°C</Text>
                 <Text $fontsize="font_size_sm">Se siente mas fresco con el viento</Text>
               </S.StackList>
             </Card>
@@ -180,7 +200,7 @@ const HomePage: FC = () => {
               {...cardCommonProps}
             >
               <S.StackList>
-                <Text $fontsize="font_size_lg">{weather?.current.humidity}%</Text>
+                <Text $fontsize="font_size_xl">{weather?.current.humidity}%</Text>
                 <Text $fontsize="font_size_sm">{`El punto de rocío ahora es ${weather?.current.dewPoint}°`}</Text>
               </S.StackList>
             </Card>
@@ -194,7 +214,7 @@ const HomePage: FC = () => {
               {...cardCommonProps}
             >
               <S.StackList>
-                <Text $fontsize="font_size_lg">{weather?.current.pressure}hPa</Text>
+                <Text $fontsize="font_size_xl">{weather?.current.pressure}</Text>
                 <Text $fontsize="font_size_sm">Arte</Text>
               </S.StackList>
             </Card>

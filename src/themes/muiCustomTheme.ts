@@ -19,7 +19,7 @@ const theme = createTheme({
         white:                '#FFF'
       },
       typography: {
-        battleship_grey: '#868585',
+        battleship_grey: '#97A0A6',
         white:           '#FFF'
       }
     },

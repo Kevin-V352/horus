@@ -13,50 +13,50 @@ import WbTwilightOutlinedIcon from '@mui/icons-material/WbTwilightOutlined';
 
 import type * as T from './types';
 
-const WeatherIcon: FC<T.Props> = ({ iconId }) => {
+const WeatherIcon: FC<T.Props> = ({ iconId, iconProps }) => {
 
   switch (iconId) {
 
     case '01d':
-      return <LightModeOutlinedIcon/>;
+      return <LightModeOutlinedIcon {...iconProps} />;
 
     case '01n':
-      return <DarkModeOutlinedIcon/>;
+      return <DarkModeOutlinedIcon {...iconProps} />;
 
     case '02d':
     case '03d':
     case '03n':
     case '04d':
     case '04n':
-      return <CloudOutlinedIcon/>;
+      return <CloudOutlinedIcon {...iconProps} />;
 
     case '02n':
-      return <NightsStayOutlinedIcon/>;
+      return <NightsStayOutlinedIcon {...iconProps} />;
 
     case '09d':
     case '09n':
     case '10d':
     case '10n':
-      return <WaterDropOutlinedIcon/>;
+      return <WaterDropOutlinedIcon {...iconProps} />;
 
     case '11d':
     case '11n':
-      return <ThunderstormOutlinedIcon/>;
+      return <ThunderstormOutlinedIcon {...iconProps} />;
 
     case '13d':
     case '13n':
-      return <AcUnitOutlinedIcon/>;
+      return <AcUnitOutlinedIcon {...iconProps} />;
 
     case '50d':
     case '50n':
-      return <WavesOutlinedIcon/>;
+      return <WavesOutlinedIcon {...iconProps} />;
 
     case '10001d':
     case '10001n':
-      return <WbTwilightOutlinedIcon/>;
+      return <WbTwilightOutlinedIcon {...iconProps} />;
 
     default:
-      return <BlockOutlinedIcon/>;
+      return <BlockOutlinedIcon {...iconProps} />;
 
   };
 
