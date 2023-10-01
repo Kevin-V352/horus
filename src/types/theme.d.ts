@@ -7,7 +7,7 @@ declare module '@mui/material/styles' {
         background: {
           black_transparent_05: string;
           black_transparent_03: string;
-          battleship_grey: string;
+          white: string;
         };
         typography: {
           battleship_grey: string;
@@ -30,7 +30,7 @@ declare module '@mui/material/styles' {
         background?: {
           black_transparent_05?: string;
           black_transparent_03?: string;
-          battleship_grey?: string;
+          white?: string;
         };
         typography?: {
           battleship_grey?: string;

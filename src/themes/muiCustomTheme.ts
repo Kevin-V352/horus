@@ -15,7 +15,8 @@ const theme = createTheme({
     pallete: {
       background: {
         black_transparent_03: 'rgba(0, 0, 0, 0.3)',
-        black_transparent_05: 'rgba(0, 0, 0, 0.5)'
+        black_transparent_05: 'rgba(0, 0, 0, 0.5)',
+        white:                '#FFF'
       },
       typography: {
         battleship_grey: '#868585',
