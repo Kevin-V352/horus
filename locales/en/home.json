@@ -1,0 +1,13 @@
+{
+  "page": {},
+  "information_cards": {
+    "forecast_title": "7-day forecast",
+    "uv_index_title": "UV index",
+    "sunset_title": "Sunset",
+    "precipitation_title": "Precipitation",
+    "temperature_title": "Temperature",
+    "humidity_title": "Humidity",
+    "pressure_title": "Pressure",
+    "interactive_map_title": "Interactive map"
+  }
+}

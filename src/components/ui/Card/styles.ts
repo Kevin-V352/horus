@@ -20,5 +20,7 @@ export const CustomCardContent = styled(CardContent)`
 
 export const IconWrapper = styled(Box)((props) => ({
   // @ts-expect-error unknow error
-  color: props.theme.customTheme.pallete.typography.battleship_grey
+  color:      props.theme.customTheme.pallete.typography.battleship_grey,
+  display:    'flex',
+  alignItems: 'center'
 }));
