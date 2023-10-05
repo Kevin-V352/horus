@@ -7,11 +7,18 @@ import BeachAccessOutlinedIcon from '@mui/icons-material/BeachAccessOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import DeviceThermostatOutlinedIcon from '@mui/icons-material/DeviceThermostatOutlined';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MapIcon from '@mui/icons-material/Map';
 import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined';
 import WaterDropOutlinedIcon from '@mui/icons-material/WaterDropOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import WbTwilightOutlinedIcon from '@mui/icons-material/WbTwilightOutlined';
-import { AccordionDetails, Box, Grid, Stack } from '@mui/material';
+import {
+  AccordionDetails,
+  Box,
+  Grid,
+  Stack
+} from '@mui/material';
+import useTranslation from 'next-translate/useTranslation';
 
 import { WeatherContext } from '@/contexts';
 import { useWeather } from '@/hooks';
@@ -21,11 +28,13 @@ import { formatters } from '@/utils';
 
 import * as S from './styles';
 
-const cardCommonProps = { minHeight: 235 };
+const cardCommonProps = { minHeight: 220 };
 
 const HomePage: FC = () => {
 
   const { changeBackground } = useContext(WeatherContext);
+
+  const { t } = useTranslation('home');
 
   const { data: weather } = useWeather(-32.745820, -60.734330, 'en');
 
@@ -95,7 +104,7 @@ const HomePage: FC = () => {
 
           <Grid item xs={12}>
             <Card
-              title='Previsión a 7 dias'
+              title={t('information_cards.forecast_title')}
               headIcon={<CalendarMonthOutlinedIcon />}
               loading={!weather?.daily}
               minHeight={228}
@@ -128,7 +137,7 @@ const HomePage: FC = () => {
 
           <Grid item xs={4}>
             <Card
-              title='Índice UV'
+              title={t('information_cards.uv_index_title')}
               headIcon={<WbSunnyOutlinedIcon />}
               loading={(!weather?.current.uvi) && (typeof weather?.current.uvi !== 'number')}
               {...cardCommonProps}
@@ -150,7 +159,7 @@ const HomePage: FC = () => {
 
           <Grid item xs={4}>
             <Card
-              title="Atardecer"
+              title={t('information_cards.sunset_title')}
               headIcon={<WbTwilightOutlinedIcon />}
               loading={!weather?.current.sunset}
               {...cardCommonProps}
@@ -166,7 +175,7 @@ const HomePage: FC = () => {
 
           <Grid item xs={4}>
             <Card
-              title="Precipitación"
+              title={t('information_cards.precipitation_title')}
               headIcon={<BeachAccessOutlinedIcon />}
               loading={(!weather?.current.precipitation) && (typeof weather?.current.precipitation !== 'number')}
               {...cardCommonProps}
@@ -180,7 +189,7 @@ const HomePage: FC = () => {
 
           <Grid item xs={4}>
             <Card
-              title="Temperatura"
+              title={t('information_cards.temperature_title')}
               headIcon={<DeviceThermostatOutlinedIcon />}
               loading={!weather?.current.temp}
               {...cardCommonProps}
@@ -194,7 +203,7 @@ const HomePage: FC = () => {
 
           <Grid item xs={4}>
             <Card
-              title="Humedad"
+              title={t('information_cards.humidity_title')}
               headIcon={<WaterDropOutlinedIcon />}
               loading={!weather?.current.humidity}
               {...cardCommonProps}
@@ -208,7 +217,7 @@ const HomePage: FC = () => {
 
           <Grid item xs={4}>
             <Card
-              title="Presión"
+              title={t('information_cards.pressure_title')}
               headIcon={<SpeedOutlinedIcon />}
               loading={!weather?.current.pressure}
               {...cardCommonProps}
@@ -222,8 +231,8 @@ const HomePage: FC = () => {
 
           <Grid item xs={12}>
             <Card
-              title='Precipitación'
-              headIcon={<BeachAccessOutlinedIcon />}
+              title={t('information_cards.interactive_map_title')}
+              headIcon={<MapIcon />}
               loading={false}
             >
               <Map />
