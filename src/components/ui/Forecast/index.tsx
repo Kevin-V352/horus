@@ -27,9 +27,9 @@ const Forecast: FC<T.Props> = ({ data }) => {
         {
           data.map(({ hour, iconId, temp, type }, index) => (
             <S.ForecastItem key={index}>
-              <Text $fontsize='font_size_md'>{hour}</Text>
+              <Text $fontSize='font_size_md'>{hour}</Text>
               <WeatherIcon iconId={iconId as any} iconProps={{ fontSize: 'large' }} />
-              <Text $fontsize='font_size_md'>
+              <Text $fontSize='font_size_md'>
                 {(type === 'hour') ? `${temp}°` : formatters.capitalize(type)}
               </Text>
             </S.ForecastItem>

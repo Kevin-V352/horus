@@ -5,5 +5,5 @@ export interface IProps {
 };
 
 export interface IMainLayoutContainerProps {
-  $backgroundimageid: string;
+  $backgroundImageId: string;
 };

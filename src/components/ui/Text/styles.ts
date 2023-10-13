@@ -1,6 +1,13 @@
-import { type CustomTheme, styled, Typography, type Theme } from '@mui/material';
+import { type CustomTheme, Typography, type Theme } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 import type * as T from './types';
+
+const customTypographyExtraProps = [
+  '$color',
+  '$fontSize',
+  '$fontWeight'
+];
 
 const getColorFromTheme = (color: T.CustomTypographyProps['$color'], theme: Theme): string => {
 
@@ -15,7 +22,7 @@ const getColorFromTheme = (color: T.CustomTypographyProps['$color'], theme: Them
 
 };
 
-const getFontSizeFromTheme = (fontSize: T.CustomTypographyProps['$fontsize'], theme: Theme): string => {
+const getFontSizeFromTheme = (fontSize: T.CustomTypographyProps['$fontSize'], theme: Theme): string => {
 
   const { customTheme: { typography } } = theme as CustomTheme;
 
@@ -28,8 +35,10 @@ const getFontSizeFromTheme = (fontSize: T.CustomTypographyProps['$fontsize'], th
 
 };
 
-export const CustomTypography = styled(Typography)<T.CustomTypographyProps>((props) => ({
+export const CustomTypography = styled(Typography, {
+  shouldForwardProp: (prop) => (!customTypographyExtraProps.includes(prop as string))
+})<T.CustomTypographyProps>((props) => ({
   color:      getColorFromTheme(props.$color, props.theme),
-  fontSize:   getFontSizeFromTheme(props.$fontsize, props.theme),
+  fontSize:   getFontSizeFromTheme(props.$fontSize, props.theme),
   fontWeight: props.$fontWeight
 }));

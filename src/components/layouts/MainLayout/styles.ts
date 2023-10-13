@@ -1,12 +1,18 @@
 'use client';
 
-import { Container as MuiContainer } from '@mui/material';
+import { Container } from '@mui/material';
 import { styled } from '@mui/system';
 
 import type * as T from './types';
 
-export const Container = styled(MuiContainer)<T.IMainLayoutContainerProps>((props) => ({
-  background:         `url('/assets/backgrounds/${props.$backgroundimageid}.jpg') no-repeat fixed`,
+const mainLayoutContainerExtraProps = [
+  '$backgroundImageId'
+];
+
+export const MainLayoutContainer = styled(Container, {
+  shouldForwardProp: (prop) => (!mainLayoutContainerExtraProps.includes(prop as string))
+})<T.IMainLayoutContainerProps>((props) => ({
+  background:         `url('/assets/backgrounds/${props.$backgroundImageId}.jpg') no-repeat fixed`,
   backgroundSize:     'cover',
   backgroundPosition: 'center',
   display:            'flex',
