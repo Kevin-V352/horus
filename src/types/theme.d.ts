@@ -7,6 +7,7 @@ declare module '@mui/material/styles' {
         background: {
           black_transparent_05: string;
           black_transparent_03: string;
+          white_transparent_03: string;
           white: string;
         };
         typography: {
@@ -30,6 +31,7 @@ declare module '@mui/material/styles' {
         background?: {
           black_transparent_05?: string;
           black_transparent_03?: string;
+          white_transparent_03?: string;
           white?: string;
         };
         typography?: {

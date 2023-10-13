@@ -16,6 +16,7 @@ const theme = createTheme({
       background: {
         black_transparent_03: 'rgba(0, 0, 0, 0.3)',
         black_transparent_05: 'rgba(0, 0, 0, 0.5)',
+        white_transparent_03: 'rgba(255, 255, 255, 0.3)',
         white:                '#FFF'
       },
       typography: {
