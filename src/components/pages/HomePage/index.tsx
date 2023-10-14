@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
-import { useEffect, type FC, useContext } from 'react';
+import { useEffect, type FC, useContext, useState } from 'react';
 
 import BeachAccessOutlinedIcon from '@mui/icons-material/BeachAccessOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
@@ -22,8 +22,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { WeatherContext } from '@/contexts';
 import { useWeather } from '@/hooks';
-import { type WeatherIconId } from '@/interfaces';
-import { Card, Forecast, Map, ProgressBar, Text, WeatherIcon } from '@/ui';
+import { type MinGeocodingResponse, type WeatherIconId } from '@/interfaces';
+import { Card, Forecast, Map, ProgressBar, SearchBoxModal, Text, WeatherIcon } from '@/ui';
 import { formatters } from '@/utils';
 
 import * as S from './styles';
@@ -33,10 +33,33 @@ const cardCommonProps = { minHeight: 220 };
 const HomePage: FC = () => {
 
   const { changeBackground } = useContext(WeatherContext);
+  const [open, setOpen] = useState(false);
 
   const { t } = useTranslation('home');
 
-  const { data: weather } = useWeather(-32.745820, -60.734330, 'en');
+  const { inputData: locationData, responseData: weather, setLocation } = useWeather();
+
+  console.log(locationData);
+
+  const openSearchBoxModal = (): void => {
+
+    setOpen(true);
+
+  };
+
+  const closeSearchBoxModal = (): void => {
+
+    setOpen(false);
+
+  };
+
+  const onLocationChange = (location: MinGeocodingResponse): void => {
+
+    const { lat, lon, locationName } = location;
+
+    setLocation({ lat, lon, locationName });
+
+  };
 
   useEffect(() => {
 
@@ -55,25 +78,29 @@ const HomePage: FC = () => {
           gap:            '25px'
         }}>
 
+          <SearchBoxModal
+            open={open}
+            onClose={closeSearchBoxModal}
+            onLocationChange={onLocationChange}
+          />
+
           <Text
-            $fontsize='font_size_xxl'
+            $fontSize='font_size_xxl'
             $fontWeight='bold'
           >
-            17°
+            {weather?.current.temp}°C
           </Text>
 
           <S.LocationButton
             variant="text"
+            onClick={openSearchBoxModal}
           >
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <S.CustomSearchIcon fontSize='small' />
-              <Text
-                $fontsize='font_size_lg'
-                $fontWeight='bold'
-              >
-                Barcelona, España
-              </Text>
-            </Box>
+            <Text
+              $fontSize='font_size_lg'
+              $fontWeight='bold'
+            >
+              {locationData.locationName}
+            </Text>
           </S.LocationButton>
 
           <Stack
@@ -85,7 +112,7 @@ const HomePage: FC = () => {
               iconId={weather?.current.iconId as WeatherIconId || '01d'}
               iconProps={{ fontSize: 'large', style: { color: '#FFF' } }}
             />
-            <Text $fontsize='font_size_md'>{weather?.current.description ? formatters.capitalize(weather.current.description) : ''}</Text>
+            <Text $fontSize='font_size_md'>{weather?.current.description ? formatters.capitalize(weather.current.description) : ''}</Text>
           </Stack>
 
           {
@@ -143,8 +170,8 @@ const HomePage: FC = () => {
               {...cardCommonProps}
             >
               <Stack textAlign="center">
-                <Text $fontsize="font_size_xl">{weather?.current.uvi}</Text>
-                <Text $fontsize="font_size_md">Promedio</Text>
+                <Text $fontSize="font_size_xl">{weather?.current.uvi}</Text>
+                <Text $fontSize="font_size_md">Promedio</Text>
                 <S.UVSlider
                   aria-label="Default"
                   valueLabelDisplay="auto"
@@ -165,9 +192,9 @@ const HomePage: FC = () => {
               {...cardCommonProps}
             >
               <S.StackList>
-                <Text $fontsize="font_size_xl">{weather?.current.sunset}</Text>
+                <Text $fontSize="font_size_xl">{weather?.current.sunset}</Text>
                 {
-                  weather?.current.sunrise && <Text $fontsize="font_size_sm">{`Amanecer: ${weather?.current.sunrise}`}</Text>
+                  weather?.current.sunrise && <Text $fontSize="font_size_sm">{`Amanecer: ${weather?.current.sunrise}`}</Text>
                 }
               </S.StackList>
             </Card>
@@ -181,8 +208,8 @@ const HomePage: FC = () => {
               {...cardCommonProps}
             >
               <S.StackList>
-                <Text $fontsize="font_size_xl">{weather?.current.precipitation}mm</Text>
-                <Text $fontsize="font_size_sm">Predicción de la última hora</Text>
+                <Text $fontSize="font_size_xl">{weather?.current.precipitation}mm</Text>
+                <Text $fontSize="font_size_sm">Predicción de la última hora</Text>
               </S.StackList>
             </Card>
           </Grid>
@@ -195,8 +222,8 @@ const HomePage: FC = () => {
               {...cardCommonProps}
             >
               <S.StackList>
-                <Text $fontsize="font_size_xl">{weather?.current.temp}°C</Text>
-                <Text $fontsize="font_size_sm">Se siente mas fresco con el viento</Text>
+                <Text $fontSize="font_size_xl">{weather?.current.temp}°C</Text>
+                <Text $fontSize="font_size_sm">Se siente mas fresco con el viento</Text>
               </S.StackList>
             </Card>
           </Grid>
@@ -209,8 +236,8 @@ const HomePage: FC = () => {
               {...cardCommonProps}
             >
               <S.StackList>
-                <Text $fontsize="font_size_xl">{weather?.current.humidity}%</Text>
-                <Text $fontsize="font_size_sm">{`El punto de rocío ahora es ${weather?.current.dewPoint}°`}</Text>
+                <Text $fontSize="font_size_xl">{weather?.current.humidity}%</Text>
+                <Text $fontSize="font_size_sm">{`El punto de rocío ahora es ${weather?.current.dewPoint}°`}</Text>
               </S.StackList>
             </Card>
           </Grid>
@@ -223,8 +250,8 @@ const HomePage: FC = () => {
               {...cardCommonProps}
             >
               <S.StackList>
-                <Text $fontsize="font_size_xl">{weather?.current.pressure}</Text>
-                <Text $fontsize="font_size_sm">Arte</Text>
+                <Text $fontSize="font_size_xl">{weather?.current.pressure}</Text>
+                <Text $fontSize="font_size_sm">Arte</Text>
               </S.StackList>
             </Card>
           </Grid>
@@ -235,7 +262,11 @@ const HomePage: FC = () => {
               headIcon={<MapIcon />}
               loading={false}
             >
-              <Map />
+              <Map
+                lat={locationData.lat}
+                lon={locationData.lon}
+                zoom={8}
+              />
             </Card>
           </Grid>
 

@@ -18,7 +18,7 @@ const ProgressBar: FC<T.Props> = ({ data }) => {
       columnSpacing="10px"
     >
       <Grid item xs={3}>
-        <Text $fontsize='font_size_md'>{dayName}</Text>
+        <Text $fontSize='font_size_md'>{dayName}</Text>
       </Grid>
       <Grid item xs={1}>
         <Box>
@@ -26,7 +26,7 @@ const ProgressBar: FC<T.Props> = ({ data }) => {
         </Box>
       </Grid>
       <Grid item xs={1}>
-        <Text $fontsize='font_size_md'>{`${minTemp}°`}</Text>
+        <Text $fontSize='font_size_md'>{`${minTemp}°`}</Text>
       </Grid>
       <Grid item xs={6}>
         <S.GradientLinearProgress
@@ -35,7 +35,7 @@ const ProgressBar: FC<T.Props> = ({ data }) => {
         />
       </Grid>
       <Grid item xs={1}>
-        <Text $fontsize='font_size_md'>{`${maxTemp}°`}</Text>
+        <Text $fontSize='font_size_md'>{`${maxTemp}°`}</Text>
       </Grid>
     </S.CustomGridContainer>
   );

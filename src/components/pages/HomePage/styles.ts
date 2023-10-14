@@ -49,7 +49,8 @@ export const StackList = styled(Stack)`
 export const LocationButton = styled(Button)`
   text-transform: none;
   width: fit-content;
-  padding: 0px
+  padding: 0px;
+  text-align: left;
 `;
 
 export const CustomSearchIcon = styled(SearchIcon)`

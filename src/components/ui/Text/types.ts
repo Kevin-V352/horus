@@ -6,6 +6,6 @@ export interface Props extends CustomTypographyProps {
 
 export interface CustomTypographyProps {
   $color?: 'battleship_grey' | 'white';
-  $fontsize?: 'font_size_xxl' | 'font_size_xl' | 'font_size_lg' | 'font_size_md' | 'font_size_sm';
+  $fontSize?: 'font_size_xxl' | 'font_size_xl' | 'font_size_lg' | 'font_size_md' | 'font_size_sm';
   $fontWeight?: CSSProperties['fontWeight'];
 };

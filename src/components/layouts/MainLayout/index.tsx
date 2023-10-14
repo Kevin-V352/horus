@@ -12,12 +12,12 @@ const MainLayout: FC<IProps> = ({ children }) => {
   const { backgroundId } = useContext(WeatherContext);
 
   return (
-    <S.Container
+    <S.MainLayoutContainer
       maxWidth={false}
-      $backgroundimageid={backgroundId}
+      $backgroundImageId={backgroundId}
     >
       {children}
-    </S.Container>
+    </S.MainLayoutContainer>
   );
 
 };
