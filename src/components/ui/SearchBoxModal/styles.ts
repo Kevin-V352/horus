@@ -1,4 +1,4 @@
-import { styled, Box, TextField, Autocomplete } from '@mui/material';
+import { styled, Box, TextField, Autocomplete, LinearProgress } from '@mui/material';
 
 export const SearchBoxModalMainContent = styled(Box)`
   position:  absolute;
@@ -72,3 +72,24 @@ export const SearchBoxModalLocationInput = styled(TextField)((props) => ({
     }
   }
 }));
+
+export const SearchBoxModalAutocompleteLinearProgress = styled(LinearProgress)((props) => ({
+  // @ts-expect-error unknow error
+  backgroundColor: props.theme.customTheme.pallete.background.white_transparent_03,
+  borderRadius:    '10px',
+
+  '& .MuiLinearProgress-barColorPrimary': {
+    // @ts-expect-error unknow error
+    backgroundColor: props.theme.customTheme.pallete.background.white
+  }
+}));
+
+export const SearchBoxModalAutocompleteListBox = styled('div')`
+  max-height: none !important;
+`;
+
+export const SearchBoxModalAutocompleteOption = styled('li')`
+  align-items: center;
+  display: flex;
+  gap: 10px;
+`;

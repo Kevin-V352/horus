@@ -42,3 +42,14 @@ export interface MinGeocodingResponse {
   lat: number;
   lon: number;
 }
+
+export interface MinGeocodingClientResponse extends Omit<MinGeocodingResponse, 'locationName'> {
+  label: string;
+  tempId: number;
+  type: MinGeocodingResponseType;
+}
+
+export enum MinGeocodingResponseType {
+  historyItem = 'historyItem',
+  newItem = 'newItem'
+}
