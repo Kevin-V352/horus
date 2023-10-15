@@ -1,18 +1,17 @@
 import React, { type FC } from 'react';
 
-import { LinearProgress, Modal } from '@mui/material';
+import HistoryIcon from '@mui/icons-material/History';
+import { Modal } from '@mui/material';
 
 import { useGeocoding } from '@/hooks';
-import { type MinGeocodingResponse } from '@/interfaces';
+import { MinGeocodingResponseType, type MinGeocodingClientResponse, type MinGeocodingResponse } from '@/interfaces';
 
 import * as S from './styles';
 import type * as T from './types';
 
 const SearchBoxModal: FC<T.IProps> = ({ open, onClose, onLocationChange }) => {
 
-  const { loading, locations, searchLocation } = useGeocoding();
-
-  const options = locations.map((location) => ({ ...location, label: location.locationName }));
+  const { loading, locations, searchLocation, saveLocationInLocalHistory, reset } = useGeocoding();
 
   const onInputChange = (_event: React.SyntheticEvent<Element, Event>, value: string): void => {
 
@@ -21,9 +20,24 @@ const SearchBoxModal: FC<T.IProps> = ({ open, onClose, onLocationChange }) => {
 
   };
 
-  const onChange = (_event: React.SyntheticEvent<Element, Event>, value: MinGeocodingResponse): void => {
+  const onChange = (_event: React.SyntheticEvent<Element, Event>, value: MinGeocodingClientResponse): void => {
 
-    if (value) onLocationChange(value);
+    if (value) {
+
+      const { label, lat, lon } = value;
+
+      const valueToSend: MinGeocodingResponse = {
+        locationName: label,
+        lat,
+        lon
+      };
+
+      onLocationChange(valueToSend);
+      saveLocationInLocalHistory(value);
+      reset();
+
+    };
+
     onClose();
 
   };
@@ -41,11 +55,12 @@ const SearchBoxModal: FC<T.IProps> = ({ open, onClose, onLocationChange }) => {
             disablePortal
             id="search-box-autocomplete"
             loading={loading}
-            loadingText={<LinearProgress />}
+            loadingText={<S.SearchBoxModalAutocompleteLinearProgress />}
             onChange={onChange as any}
             onInputChange={onInputChange}
-            options={options}
-            PaperComponent={({ children }) => (<div>{children}</div>)}
+            options={locations}
+            ListboxComponent={(params) => (<S.SearchBoxModalAutocompleteListBox {...params} />)}
+            PaperComponent={(params) => (<div {...params} />)}
             renderInput={(params) => (
               <S.SearchBoxModalLocationInput
                 {...params}
@@ -53,9 +68,12 @@ const SearchBoxModal: FC<T.IProps> = ({ open, onClose, onLocationChange }) => {
               />
             )}
             renderOption={(props, option: any) => (
-              <li {...props} key={option.label}>
+              <S.SearchBoxModalAutocompleteOption {...props} key={option.tempId}>
+                {
+                  (option.type === MinGeocodingResponseType.historyItem) && <HistoryIcon />
+                }
                 {option.label}
-              </li>
+              </S.SearchBoxModalAutocompleteOption>
             )}
           />
       </S.SearchBoxModalMainContent>
