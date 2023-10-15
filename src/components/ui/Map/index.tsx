@@ -13,7 +13,7 @@ import { LayerTypes } from '@/interfaces';
 import type * as T from './types';
 import { MapMaker } from '..';
 
-const Map: FC<T.IProps> = ({ lat, lon, zoom = 13 }) => {
+const Map: FC<T.IProps> = ({ lat, lon, zoom = 13, minZoom = 5 }) => {
 
   const [loading, setLoading] = useState(true);
 
@@ -43,8 +43,9 @@ const Map: FC<T.IProps> = ({ lat, lon, zoom = 13 }) => {
   return (
     <MapContainer
       center={[currentLat, currentLon]}
-      zoom={zoom}
+      minZoom={minZoom}
       scrollWheelZoom={false}
+      zoom={zoom}
       style={{
         height:       '400px',
         borderRadius: '10px'
